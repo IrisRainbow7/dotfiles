@@ -38,7 +38,8 @@ bind r source-file ~/.tmux.conf \; display "Reloaded!"
 set -g default-terminal "screen-256color"
 
 # ステータスバーの色を設定する
-set -g status-style fg=white,bg=black
+set -g status-fg white
+set -g status-bg black
 
 # ステータスバーを設定する
 set-option -g status-position bottom
