@@ -1,0 +1,13 @@
+alias gitlog='git log --oneline --decorate --graph'
+export TERM=xterm-256color
+
+function crontab() {
+  local opt
+  for opt in "$@"; do
+    if [[ $opt == -r ]]; then
+      echo 'crontab -r is sealed!'
+      return 1
+    fi
+  done
+  command crontab "$@"
+}
