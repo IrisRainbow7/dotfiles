@@ -2,8 +2,13 @@ alias gitlog='git log --oneline --decorate --graph'
 alias ls='ls -G'
 alias gitcommit='git commit -v'
 alias phpstan='docker run -v $PWD:/app --rm phpstan/phpstan'
+alias zshrc='nvim ~/.zshrc'
+alias vimrc='nvim ~/.config/nvim/init.vim'
 
 alias go="nocorrect go"
+
+
+alias vim="nocorrect nvim"
 
 
 fvim() {
@@ -22,8 +27,9 @@ export PATH="/usr/local/bin/git:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 #nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 setopt print_eight_bit
 setopt no_beep
@@ -64,3 +70,10 @@ function crontab() {
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kohki/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kohki/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kohki/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kohki/google-cloud-sdk/completion.zsh.inc'; fi
