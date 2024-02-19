@@ -1,14 +1,20 @@
 alias gitlog='git log --oneline --decorate --graph'
 alias ls='ls -G'
 alias gitcommit='git commit -v'
-alias phpstan='docker run -v $PWD:/app --rm phpstan/phpstan'
-alias zshrc='nvim ~/.zshrc'
-alias vimrc='nvim ~/.config/nvim/init.vim'
-
-alias go="nocorrect go"
+alias gitpush='git push origin HEAD'
+alias zshrc='vim ~/.zshrc'
+alias vimrc='vim ~/.config/nvim/init.vim'
 
 
-alias vim="nocorrect nvim"
+alias oldvim="nocorrect nvim"
+alias vim="NVIM_APPNAME=nvimlua /Users//.local/nvim/bin/nvim"
+
+if [[ $(command -v eza) ]]; then
+  alias ls='eza --icons --git'
+  alias ll='eza -ahl -I ".DS_Store" --git'
+  alias lt='eza -T -L 3 -a -I "node_modules|.git|.cache|.DS_Store" --icons'
+  alias ltl='eza -T -L 3 -a -I "node_modules|.git|.cache|.DS_Store" -l --icons'
+fi
 
 
 fvim() {
@@ -20,6 +26,7 @@ fvim() {
 
 export TERM=screen-256color
 export LANG=ja_JP.UTF-8
+export EDITOR=vim
 
 export PATH="/usr/local/bin/git:$PATH"
 
@@ -71,9 +78,24 @@ function crontab() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+eval "$(rbenv init - zsh)"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
+
+# bun completions
+[ -s "/Users/koki.hirai/.bun/_bun" ] && source "/Users/koki.hirai/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/kohki/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kohki/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/koki.hirai/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/koki.hirai/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/kohki/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kohki/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/koki.hirai/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/koki.hirai/google-cloud-sdk/completion.zsh.inc'; fi
