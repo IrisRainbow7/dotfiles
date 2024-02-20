@@ -11,6 +11,7 @@ alias vim="NVIM_APPNAME=nvimlua /Users//.local/nvim/bin/nvim"
 
 if [[ $(command -v eza) ]]; then
   alias ls='eza --icons --git'
+  alias la='eza -ahl --icons --git'
   alias ll='eza -ahl -I ".DS_Store" --git'
   alias lt='eza -T -L 3 -a -I "node_modules|.git|.cache|.DS_Store" --icons'
   alias ltl='eza -T -L 3 -a -I "node_modules|.git|.cache|.DS_Store" -l --icons'
