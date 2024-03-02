@@ -1,9 +1,7 @@
 alias gitlog='git log --oneline --decorate --graph'
-alias ls='ls -G'
 alias gitcommit='git commit -v'
 alias gitpush='git push origin HEAD'
 alias zshrc='vim ~/.zshrc'
-alias vimrc='vim ~/.config/nvim/init.vim'
 
 
 alias oldvim="nocorrect nvim"
@@ -17,13 +15,18 @@ if [[ $(command -v eza) ]]; then
   alias ltl='eza -T -L 3 -a -I "node_modules|.git|.cache|.DS_Store" -l --icons'
 fi
 
-
 fvim() {
   files=$(git ls-files) &&
-  selected_files=$(echo "$files" | fzf -m --preview 'head -100 {}') &&
-  vim $selected_files
+  selected_files=$(echo "$files" | sk --ansi -m --preview 'bat --color=always --theme=TwoDark --style=numbers --line-range=:500 {}' | tr "\n" " ") &&
+  vim ${=selected_files}
 }
 
+frvim() {
+  files=$(git ls-files) &&
+  selected_files=$(echo "$files" | sk --ansi -i -c 'rg --color=always --line-number "{}"') &&
+  selected_file_name = echo $selected_files | awk '{print $1}' | awk -F'[:]' '{print $1}'
+  vim $selected_file_name
+}
 
 export TERM=screen-256color
 export LANG=ja_JP.UTF-8
