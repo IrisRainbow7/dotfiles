@@ -6,5 +6,10 @@
 - [fzf](https://github.com/junegunn/fzf)
 - [eza](https://github.com/eza-community/eza)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [skim](https://github.com/lotabout/skim)
+- [bat](https://github.com/sharkdp/bat)
 - [neovim(head build)](https://qiita.com/uhooi/items/95ffbfc1270df79f1fbd)
-- [(gitui)](https://github.com/extrawurst/gitui)
+- [gitui](https://github.com/extrawurst/gitui)
+- gsed (`brew install gnu-sed`)
+- [nvm](https://github.com/nvm-sh/nvm)
+
