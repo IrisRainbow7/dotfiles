@@ -12,4 +12,5 @@
 - [gitui](https://github.com/extrawurst/gitui)
 - gsed (`brew install gnu-sed`)
 - [nvm](https://github.com/nvm-sh/nvm)
+- [(fnm)](https://github.com/Schniz/fnm)
 
