@@ -27,13 +27,6 @@ frvim() {
   vim $selected_file_name
 }
 
-function igitpush() {
-  git config --global user.name "HiraiKohki"
-  git config --global user.email hirai@interg.co.jp
-  git push origin HEAD
-  git config --global user.name "Irisrainbow7"
-  git config --global user.email main@irisrainbow7.nagoya
-}
 
 export TERM=screen-256color
 export LANG=ja_JP.UTF-8
