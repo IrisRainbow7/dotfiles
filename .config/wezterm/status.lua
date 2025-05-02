@@ -4,6 +4,7 @@ local DEFAULT_FG = { Color = '#9a9eab' }
 local DEFAULT_BG = { Color = '#333333' }
 
 local SPACE_1 = ' '
+local SPACE_2 = '  '
 local SPACE_3 = '   '
 
 local HEADER_KEY_NORMAL = { Foreground = DEFAULT_FG, Text = '' }
@@ -35,17 +36,17 @@ end
 
 ---------
 --
-local HEADER_HOST = { Foreground = { Color = '#75b1a9' }, Text = '' }
-local HEADER_CWD = { Foreground = { Color = '#92aac7' }, Text = '' }
-local HEADER_DATE = { Foreground = { Color = '#ffccac' }, Text = '󱪺' }
-local HEADER_TIME = { Foreground = { Color = '#bcbabe' }, Text = '' }
-local HEADER_BATTERY = { Foreground = { Color = '#dfe166' }, Text = '' }
-local HEADER_BATTERY_CHARGE = { Foreground = { Color = '#dfe166' }, Text = '' }
+local HEADER_HOST = { Foreground = { Color = '#75b1a9' }, Text = '', Space = SPACE_2 }
+local HEADER_CWD = { Foreground = { Color = '#92aac7' }, Text = '', Space = SPACE_2 }
+local HEADER_DATE = { Foreground = { Color = '#ffccac' }, Text = '󱪺', Space = SPACE_1 }
+local HEADER_TIME = { Foreground = { Color = '#bcbabe' }, Text = '', Space = SPACE_1 }
+local HEADER_BATTERY = { Foreground = { Color = '#dfe166' }, Text = '', Space = SPACE_3 }
+local HEADER_BATTERY_CHARGE = { Foreground = { Color = '#dfe166' }, Text = '', Space = SPACE_1 }
 
 local function AddElement(elems, header, str)
   table.insert(elems, { Foreground = header.Foreground })
   table.insert(elems, { Background = DEFAULT_BG })
-  table.insert(elems, { Text = header.Text .. SPACE_1 })
+  table.insert(elems, { Text = header.Text .. header.Space })
 
   table.insert(elems, { Foreground = DEFAULT_FG })
   table.insert(elems, { Background = DEFAULT_BG })
@@ -54,23 +55,10 @@ end
 
 local function GetHostAndCwd(elems, pane)
   local uri = pane:get_current_working_dir()
+  local tty = pane:get_tty_name()
 
-  if not uri then
-    return
-  end
-
-  local cwd_uri = uri:sub(8)
-  local slash = cwd_uri:find '/'
-
-  if not slash then
-    return
-  end
-
-  local host = cwd_uri:sub(1, slash - 1)
-  local dot = host:find '[.]'
-
-  -- AddElement(elems, HEADER_HOST, dot and host:sub(1, dot - 1) or host)
-  AddElement(elems, HEADER_CWD, cwd_uri:sub(slash))
+  AddElement(elems, HEADER_HOST, tty)
+  AddElement(elems, HEADER_CWD, uri.path and uri.path or "")
 end
 
 function dayOfWeekInJapanese(weeknum)

@@ -39,6 +39,10 @@ return {
     { key = 'UpArrow', mods = 'LEADER|CTRL', action = act.AdjustPaneSize{ 'Up', 1 } },
     { key = 'DownArrow', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
     { key = 'DownArrow', mods = 'LEADER|CTRL', action = act.AdjustPaneSize{ 'Down', 1 } },
+    { key="Home", mods='', action=wezterm.action{SendString="\001"} },
+    { key="End", mods='', action=wezterm.action{SendString="\005"} },
+    { key="LeftArrow",mods='OPT',  action=wezterm.action{SendKey={key="b", mods="ALT"}} },
+    { key="RightArrow",mods='OPT',  action=wezterm.action{SendKey={key="f", mods="ALT"}} },
   },
 
   key_tables = {

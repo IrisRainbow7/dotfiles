@@ -8,6 +8,7 @@ return {
     font = wezterm.font("HackGen Console NF"),
     font_size = 13.5,
     status_update_interval = 1000,
+    show_new_tab_button_in_tab_bar = false,
     background = {
         {
             source = {

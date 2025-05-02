@@ -51,6 +51,19 @@ cmp.setup({
       mode = 'symbol_text',
       maxwidth = 50,
       ellipsis_char = '...',
+      show_labelDetails = true,
+      before = function(entry, vim_item)
+        if entry.source.name == 'nvim_lsp' then
+          local lspserver_name = nil
+          pcall(function()
+            lspserver_name = entry.source.source.client.name
+            vim_item.menu = "[LSP(" .. lspserver_name .. ")]"
+          end)
+        else
+          vim_item.menu = "[" .. entry.source.name .. "]"
+        end
+        return vim_item
+      end
     })
   }
 })

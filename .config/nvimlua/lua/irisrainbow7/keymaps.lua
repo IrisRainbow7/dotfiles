@@ -38,6 +38,31 @@ vim.keymap.set('n', '<F1>', ':WhichKey<CR>', { desc = '@ WhichKey' })
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { desc = 'x with blackhole register' })
 vim.keymap.set({ 'n', 'v' }, 'X', '"_X', { desc = 'X with blackhole register' })
 
+-- Y 行末までyank
+vim.keymap.set('n', 'Y', 'y$', { desc = '行末までyank' })
+
+-- global normal
+vim.keymap.set('n', '<Plug>@globalnormal', ':<C-u>global/^/normal<Space>', { desc = '@ global normal pattern(^)にマッチングする行に対してnormalコマンドを実行する' })
+
+-- visual indent
+vim.keymap.set('x', '>', '>gv')
+vim.keymap.set('x', '<', '<gv')
+
+-- uppercase
+vim.keymap.set('i', '<C-g><C-u>', '<esc>gUiwgi', { desc = '@ 直前の入力を大文字に uppercase' })
+
+-- Sで置換
+vim.keymap.set('n', 'S', ':%s/<C-r><C-w>//g<Left><Left>', { desc = '@ カーソル下の単語置換を起動' })
+
+-- a"などを使いやすく
+for _, quote in ipairs({'"', "'", "`"}) do
+    vim.keymap.set({"x", "o"}, "a" .. quote, "2i" .. quote)
+end
+
+-- paste indent
+vim.keymap.set('n', 'p', ']p`]')
+vim.keymap.set('n', 'P', ']P`]')
+
 -- increment & decrement (-) (+)
 vim.keymap.set({'n', 'v'}, '+', '<C-a>', { desc = 'インクリメント increment' })
 vim.keymap.set({'n', 'v'}, '-', '<C-x>', { desc = 'デクリメント decrement' })

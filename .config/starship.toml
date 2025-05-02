@@ -29,6 +29,7 @@ $terraform\
 $vagrant\
 $zig\
 $memory_usage\
+$gcloud\
 $aws\
 $azure\
 $env_var\
@@ -43,7 +44,6 @@ $shell\
 $character
 """
 
-#$gcloud\
 
 right_format = """
 $fossil_branch\

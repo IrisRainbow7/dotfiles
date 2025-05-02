@@ -4,8 +4,7 @@ alias gitpush='git push origin HEAD'
 alias zshrc='vim ~/.zshrc'
 
 
-alias oldvim="nocorrect nvim"
-alias vim="NVIM_APPNAME=nvimlua /Users//.local/nvim/bin/nvim"
+alias vim="/Users/kohki/.local/nvim/bin/nvim"
 
 if [[ $(command -v eza) ]]; then
   alias ls='eza --icons --git'
@@ -28,19 +27,17 @@ frvim() {
   vim $selected_file_name
 }
 
+function igitpush() {
+  git config --global user.name "HiraiKohki"
+  git config --global user.email hirai@interg.co.jp
+  git push origin HEAD
+  git config --global user.name "Irisrainbow7"
+  git config --global user.email main@irisrainbow7.nagoya
+}
+
 export TERM=screen-256color
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
-
-export PATH="/usr/local/bin/git:$PATH"
-
-#nodebrew用
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-#nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 setopt print_eight_bit
 setopt no_beep
@@ -69,37 +66,17 @@ precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 
-function crontab() {
-  local opt
-  for opt in "$@"; do
-    if [[ $opt == -r ]]; then
-      echo 'crontab -r is sealed!'
-      return 1
-    fi
-  done
-  command crontab "$@"
-}
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-eval "$(rbenv init - zsh)"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 eval "$(starship init zsh)"
-eval "$(direnv hook zsh)"
+
+
+# fnm
+export PATH="/Users/kohki/Library/Application Support/fnm:$PATH"
+eval "`fnm env`"
 
 # bun completions
-[ -s "/Users/koki.hirai/.bun/_bun" ] && source "/Users/koki.hirai/.bun/_bun"
+[ -s "/Users/kohki/.bun/_bun" ] && source "/Users/kohki/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/koki.hirai/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/koki.hirai/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/koki.hirai/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/koki.hirai/google-cloud-sdk/completion.zsh.inc'; fi

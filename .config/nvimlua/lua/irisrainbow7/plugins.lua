@@ -28,6 +28,24 @@ require("lazy").setup({
   {'bronson/vim-trailing-whitespace', event = {'BufRead', 'BufNewFile'}},
   {'nvim-tree/nvim-web-devicons', event = 'VeryLazy' },
   {'nvim-lua/plenary.nvim', event = 'VeryLazy'},
+  {
+    'kevinhwang91/nvim-bqf',
+    event = "FileType qf",
+    opts = {
+      auto_enable = false,
+      preview = {
+        winblend = 0,
+      },
+    },
+    keys = {
+      {'<Plug>@bqftoggle', ':BqfToggle<CR>', desc = '@ quickfixのプレビュー表示を切り替え'},
+    }
+  },
+  {
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    opts = {},
+  },
   {'sindrets/diffview.nvim',
     lazy = true,
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
@@ -67,7 +85,7 @@ require("lazy").setup({
       direction = "horizontal",
     },
     keys = {
-      {'<Leader>m', ':ToggleTerm<CR>', silent = true, desc = '@ ToggleTerm'}
+      {'<Leader>m', ':ToggleTerm direction=float<CR>', silent = true, desc = '@ ToggleTerm float'}
     }
   },
   {'nvim-pack/nvim-spectre',
@@ -300,6 +318,7 @@ require("lazy").setup({
       { '<Leader>f', ':Telescope find_files<CR>', desc = '@ Telescope find_files'},
       { '<Leader>l', ':Telescope live_grep<CR>', desc = '@ Telescope live_grep'},
       { '<Leader>b', ':Telescope buffers<CR>', desc = '@ Telescope buffers'},
+      { '<Leader>u', ':Telescope git_status<CR>', desc = '@ Telescope git_status'},
       {
         '<Leader>k',
         function()
@@ -441,16 +460,40 @@ require("lazy").setup({
             capabilities = require('cmp_nvim_lsp').default_capabilities(),
           }
         end,
-        ['ruby_ls'] = function()
-          require('lspconfig').ruby_ls.setup({
-            on_attach = function(client, buffer)
-              rubylspconfig.setup_diagnostics(client, buffer)
-            end,
-          })
-        end,
+        -- ['ruby_ls'] = function()
+          -- require('lspconfig').ruby_ls.setup({
+            -- on_attach = function(client, buffer)
+              -- rubylspconfig.setup_diagnostics(client, buffer)
+            -- end,
+          -- })
+        -- end,
         ['lua_ls'] = function()
           local lualsconfig = require 'irisrainbow7/lsp/lua_ls'
           require('lspconfig').lua_ls.setup(lualsconfig)
+        end,
+        ['ts_ls'] = function()
+          local mason_registry = require('mason-registry')
+          local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+          require('lspconfig').ts_ls.setup({
+            init_options = {
+              plugins = {
+                {
+                  name = '@vue/typescript-plugin',
+                  location = '/path/to/@vue/language-server',
+                  languages = { 'vue' },
+                },
+              },
+            },
+          })
+        end,
+        ['volar'] = function()
+          require('lspconfig').volar.setup({
+            init_options = {
+              vue = {
+                hybridMode = false,
+              },
+            },
+          })
         end
       }
       vim.api.nvim_command([[LspStart]])
