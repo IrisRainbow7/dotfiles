@@ -4,7 +4,7 @@ alias gitpush='git push origin HEAD'
 alias zshrc='vim ~/.zshrc'
 
 
-alias vim="/Users/kohki/.local/nvim/bin/nvim"
+alias vim="/Users/koki.hirai/.local/nvim/bin/nvim"
 
 if [[ $(command -v eza) ]]; then
   alias ls='eza --icons --git'
@@ -64,11 +64,11 @@ eval "$(starship init zsh)"
 
 
 # fnm
-export PATH="/Users/kohki/Library/Application Support/fnm:$PATH"
+export PATH="/Users/koki.hirai/Library/Application Support/fnm:$PATH"
 eval "`fnm env`"
 
 # bun completions
-[ -s "/Users/kohki/.bun/_bun" ] && source "/Users/kohki/.bun/_bun"
+[ -s "/Users/koki.hirai/.bun/_bun" ] && source "/Users/koki.hirai/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

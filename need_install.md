@@ -12,5 +12,6 @@
 - [gitui](https://github.com/extrawurst/gitui)
 - gsed (`brew install gnu-sed`)
 - [nvm](https://github.com/nvm-sh/nvm)
-- [(fnm)](https://github.com/Schniz/fnm)
+- [fnm](https://github.com/Schniz/fnm)
+- [background image](https://azisava.sakura.ne.jp/mandelbrot/wallpaper/1920x1080/azisava_mandelbrot_0107_1920x1080.png)
 

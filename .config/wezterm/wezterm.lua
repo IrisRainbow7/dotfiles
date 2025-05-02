@@ -12,7 +12,7 @@ return {
     background = {
         {
             source = {
-                File = '/Users/kohki/Downloads/azisava_mandelbrot_0107_1920x1080.png'
+                File = '/Users/koki.hirai/Downloads/azisava_mandelbrot_0107_1920x1080.png'
             },
             hsb = {
                 -- hue = 0.15,
