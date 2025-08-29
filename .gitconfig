@@ -3,7 +3,7 @@
     chk = checkout
     sw = switch
 [core]
-    editor = nvim
+    editor = vim
 [user]
 	name = Irisrainbow7
 	email = 

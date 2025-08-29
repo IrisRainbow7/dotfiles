@@ -199,11 +199,6 @@ require("lazy").setup({
   {'nvim-treesitter/nvim-treesitter',
     lazy = true,
     event = "BufReadPost",
-    build = function()
-      if #vim.api.nvim_list_uis() ~= 0 then
-        vim.api.nvim_command("TSUpdate")
-      end
-	end,
     dependencies = {
       {'windwp/nvim-ts-autotag'},
       {'nvim-treesitter/nvim-treesitter-textobjects'},
@@ -439,8 +434,8 @@ require("lazy").setup({
   },
   -----------
   {'neovim/nvim-lspconfig',
-    lazy = true,
     event = { "CursorHold", "CursorHoldI" },
+    -- event = "VeryLazy",
     dependencies = {
       {'williamboman/mason.nvim'},
       {'williamboman/mason-lspconfig.nvim'},
@@ -450,54 +445,6 @@ require("lazy").setup({
         },
       }
     },
-    config = function ()
-      require('mason').setup()
-      require("mason-lspconfig").setup()
-      local rubylspconfig = require 'irisrainbow7/lsp/ruby-lsp'
-      require('mason-lspconfig').setup_handlers {
-        function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = require('cmp_nvim_lsp').default_capabilities(),
-          }
-        end,
-        -- ['ruby_ls'] = function()
-          -- require('lspconfig').ruby_ls.setup({
-            -- on_attach = function(client, buffer)
-              -- rubylspconfig.setup_diagnostics(client, buffer)
-            -- end,
-          -- })
-        -- end,
-        ['lua_ls'] = function()
-          local lualsconfig = require 'irisrainbow7/lsp/lua_ls'
-          require('lspconfig').lua_ls.setup(lualsconfig)
-        end,
-        ['ts_ls'] = function()
-          local mason_registry = require('mason-registry')
-          local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
-          require('lspconfig').ts_ls.setup({
-            init_options = {
-              plugins = {
-                {
-                  name = '@vue/typescript-plugin',
-                  location = '/path/to/@vue/language-server',
-                  languages = { 'vue' },
-                },
-              },
-            },
-          })
-        end,
-        ['volar'] = function()
-          require('lspconfig').volar.setup({
-            init_options = {
-              vue = {
-                hybridMode = false,
-              },
-            },
-          })
-        end
-      }
-      vim.api.nvim_command([[LspStart]])
-    end
   },
   {'hrsh7th/nvim-cmp',
     event = {'InsertEnter', 'CmdlineEnter'},
@@ -528,9 +475,8 @@ require("lazy").setup({
       local null_ls = require('null-ls')
       null_ls.setup {
         sources = {
-          null_ls.builtins.diagnostics.selene,
           null_ls.builtins.code_actions.gitrebase,
-          null_ls.builtins.formatting.stylua
+          null_ls.builtins.formatting.prettierd,
         }
       }
     end

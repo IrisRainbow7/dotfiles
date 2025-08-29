@@ -89,3 +89,11 @@ vim.api.nvim_create_autocmd({"TabNew", "TabClosed"}, {
   callback = function()
   end
 }) ]]
+
+
+vim.api.nvim_create_autocmd({'LspAttach'}, {
+  pattern = {'*.vue'},
+  callback = function()
+    vim.cmd('LspStart vtsls')
+  end
+})

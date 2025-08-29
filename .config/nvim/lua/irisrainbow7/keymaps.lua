@@ -127,6 +127,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<Leader>c', ':Lspsaga code_action<CR>', opts('lspsaga コードアクションを表示'))
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts('使用箇所を表示'))
     vim.keymap.set('n', '<leader>o', vim.lsp.buf.format, opts('lsp 開いているファイルをフォーマット'))
+    vim.keymap.set(
+      'n',
+      '<leader>p',
+      function()
+        vim.lsp.buf.format {
+          filter = function(client) return client.name == "null-ls" end
+        }
+      end,
+      opts('lsp 開いているファイルをnone_lsでフォーマット')
+    )
     vim.keymap.set('n', '<leader>i', ':Lspsaga finder<CR>', opts('Lspsaga finder'))
     vim.keymap.set('n', '<leader>w', ':Lspsaga show_workspace_diagnostics<CR>', opts('lspsaga workspaceのdiagnosticsを表示'))
   end,
